@@ -4,13 +4,13 @@ from setuptools import setup
 from torch.utils.cpp_extension import BuildExtension, CUDAExtension
 
 setup(
-    name="cutlass",
+    name="pingpong",
     ext_modules=[
         CUDAExtension(
-            "cutlass",
+            "pingpong",
             [
                 "cutlass_interface.cpp",
-                "cutlass_kernel.cu",
+                "pingpong_kernel.cu",
             ],
             include_dirs=[
                 "/data/users/less/local/cutlass_local/include",
