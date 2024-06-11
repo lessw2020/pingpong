@@ -12,6 +12,23 @@ from triton.testing import do_bench  # @manual
 from triton_kernel import matmul as triton_matmul
 
 
+# cutlass - from vllm
+# https://github.com/vllm-project/vllm/blob/csrc/quantization/cutlass_w8a8/scaled_mm_dq_c3x.cu
+def cutlass_scaled_mm_dq(a: torch.Tensor, b: torch.Tensor,
+                         a_scales: torch.Tensor, b_scales: torch.Tensor,
+                         out_dtype: Type[torch.dtype]) -> torch.Tensor:
+    assert (b.shape[0] % 16 == 0 and b.shape[1] % 16 == 0)
+    assert (out_dtype is torch.bfloat16 or out_dtype is torch.float16)
+
+    m = a.shape[0]
+    n = b.shape[1]
+    out = torch.empty((m, n), dtype=out_dtype, device=a.device)
+
+    # vllm_ops.cutlass_scaled_mm_dq(out, a, b, a_scales, b_scales)
+    
+
+    return out
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--profile", action="store_true")

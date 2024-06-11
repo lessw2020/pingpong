@@ -5,6 +5,7 @@ from torch.utils.cpp_extension import BuildExtension, CUDAExtension
 
 setup(
     name="pingpong",
+    version='1.0.6',
     ext_modules=[
         CUDAExtension(
             "pingpong",
